@@ -1,4 +1,5 @@
 package com.car.rent_car.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
@@ -41,25 +42,14 @@ public class Voiture {
     @JoinColumn(nullable = false, name = "marque_id")
     @JsonIgnore
     private Marque marque;
-    @OneToOne(mappedBy = "voiture")
+    @OneToOne(mappedBy = "voiture", fetch = FetchType.EAGER)
+    @JsonBackReference // Prevent serialization
     private Assurance assurance;
-    @OneToMany(mappedBy = "voiture", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PrixVoiture> prixList;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "carLocation_id")
-    private CarLocation carLocation;
-
-    // Consider adding utility methods to manage bi-directional relationships
-    public void setCarLocation(CarLocation carLocation) {
-        if (carLocation == null) {
-            if (this.carLocation != null) {
-                this.carLocation.setVoiture(null);
-            }
-        } else {
-            carLocation.setVoiture(this);
-        }
-        this.carLocation = carLocation;
-    }
+    @OneToOne(mappedBy = "voiture", fetch = FetchType.EAGER)
+    @JsonBackReference // Prevent serialization
+    private PrixVoiture prixVoiture;
+    @OneToOne
+    private  CarLocation carLocation;
 
     // Other fields, getters, setters, and constructors
 

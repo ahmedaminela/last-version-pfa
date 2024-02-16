@@ -2,6 +2,7 @@ package com.car.rent_car.models;
 
 import com.car.rent_car.enums.PricingScenario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -19,9 +20,9 @@ public class PrixVoiture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal prix;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "voiture_id")
+    @OneToOne
+    @JoinColumn(nullable = false, name = "voiture_id")
+    @JsonManagedReference // Manage serialization
     private Voiture voiture;
     @Enumerated(EnumType.STRING)
     private PricingScenario scenario;

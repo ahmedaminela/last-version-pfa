@@ -2,6 +2,7 @@ package com.car.rent_car.models;
 
 import com.car.rent_car.requests.AssuranceRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,9 +25,9 @@ public class Assurance {
     private String type;
     private Date date_fin;
     private Double prix_assurance;
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER) // Specify fetch type as EAGER
-    @JoinColumn(name = "voiture_id")
+    @OneToOne
+    @JoinColumn(nullable = false, name = "voiture_id")
+    @JsonManagedReference // Manage serialization
     private Voiture voiture;
 
     // Other fields, getters, setters, and constructors
