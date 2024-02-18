@@ -34,6 +34,7 @@ public class Voiture {
     @JsonFormat(pattern="yyyy-MM-dd", timezone="GMT+1")
     private Date date_sortie;
     private int puissance;
+    private String img;
 
     @OneToMany(mappedBy = "voiture")
     private List<Reservation> reservations;
@@ -42,11 +43,12 @@ public class Voiture {
     @JoinColumn(nullable = false, name = "marque_id")
     @JsonIgnore
     private Marque marque;
-    @OneToOne(mappedBy = "voiture", fetch = FetchType.EAGER)
-    @JsonBackReference // Prevent serialization
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "voiture")
+    @JsonIgnoreProperties("voiture") // Avoid cyclic dependency
     private Assurance assurance;
-    @OneToOne(mappedBy = "voiture", fetch = FetchType.EAGER)
-    @JsonBackReference // Prevent serialization
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "voiture")
+    @JsonIgnoreProperties("voiture") // Avoid cyclic dependency
     private PrixVoiture prixVoiture;
     @OneToOne
     private  CarLocation carLocation;

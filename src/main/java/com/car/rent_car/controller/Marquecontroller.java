@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/marques")
+//@CrossOrigin("*") // Allow CORS only for this endpoint
 public class Marquecontroller {
     private final MarqueService marqueService;
 

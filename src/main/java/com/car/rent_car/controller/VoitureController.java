@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/voitures")
+//@CrossOrigin("*") // Allow CORS only for this endpoint
 public class VoitureController {
 
     private final VoitureService voitureService;

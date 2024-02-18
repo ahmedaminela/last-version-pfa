@@ -22,5 +22,6 @@ public class VoitureRequest {
     @JsonFormat(pattern="yyyy-MM-dd", timezone="GMT+1")
     private Date date_sortie;
     private int puissance;
+    private String img;
     private long marque_id;
 }
