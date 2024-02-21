@@ -23,5 +23,7 @@ public class VoitureRequest {
     private Date date_sortie;
     private int puissance;
     private String img;
+    private String descri;
+    private String type;
     private long marque_id;
 }
